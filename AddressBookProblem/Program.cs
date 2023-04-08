@@ -26,7 +26,8 @@ namespace AddressBookProblems
                     "10.ViewPersonByCityOrStateInDictionaryAB\n" +
                     "11.GetNumberOfContactPersonsThatIsCounrByCityOrStateInList\n" +
                     "12.SortEntriesInAddressBookByPersonsNameInList\n" +
-                    "13.Exit\n");
+                    "13.SortPersonByCityStateOrZipInList\n" +
+                    "14.Exit\n");
                 int option = Convert.ToInt32(Console.ReadLine());
                 switch (option)
                 {
@@ -76,6 +77,10 @@ namespace AddressBookProblems
                         break;
                     case 12:
                         AddressBookMain.SortPersonsName();
+                        Console.Clear();
+                        break;
+                    case 13:
+                        AddressBookMain.SortPersonByCityStateOrZip();
                         Console.Clear();
                         break;
                     default:
