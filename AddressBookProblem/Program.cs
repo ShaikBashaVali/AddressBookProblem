@@ -7,41 +7,62 @@ namespace AddressBookProblems
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to the Address Book");
-            string command = "";
-            while (command != "exit")
+            Console.Clear();
+            List<Contacts> Person = new List<Contacts>();
+            Console.WriteLine("*****----Welcome to Address Book Program----*****\n");
+            bool flag = true;
+            while (flag)
             {
-                Console.Clear();
-                Console.WriteLine("The commands are:\n 1.create\n 2.list\n 3.edit\n 4.delete\n 5.Multi\n 6.newUser\n 7.exit\n ");
-                Console.WriteLine("Please enter a command: ");
-                command = Console.ReadLine().ToLower();
-
-                switch (command)
+                Console.WriteLine("Please select given options:---\n--------------------");
+                Console.WriteLine("1.AddContacts\n" +
+                    "2.DisplayDetails\n" +
+                    "3.EditPersonDetails\n" +
+                    "4.DeletePersonByUsingPersonName\n" +
+                    "5.AddMultiplePerson\n" +
+                    "6.CreateDictionaryContacts\n" +
+                    "7.DisplayDictionaryList\n" +
+                    "8.CheckDuplicateEntryOfSamePersonByPersonNameInList\n" +
+                    "9.Exit\n");
+                int option = Convert.ToInt32(Console.ReadLine());
+                switch (option)
                 {
-                    case "create":
-                        CreateContacts.PersonInformations();
+                    case 1:
+                        AddressBookMain.AddContacts();
+                        Console.Clear();
                         break;
-                    case "list":
-                        CreateContacts.ListPeople();
+                    case 2:
+                        AddressBookMain.DisplayDetails();
+                        Console.Clear();
                         break;
-                    case "edit":
-                        CreateContacts.EditOfDetails();
+                    case 3:
+                        AddressBookMain.EditPersonDetails();
+                        Console.Clear();
                         break;
-                    case "delete":
-                        CreateContacts.DeletePerson();
+                    case 4:
+                        AddressBookMain.DeletePersonByUsingPersonName();
+                        Console.Clear();
                         break;
-                    case "Multi":
-                        CreateContacts.AddMultipleContacts();
+                    case 5:
+                        AddressBookMain.AddMultiplePerson();
+                        Console.Clear();
                         break;
-                    case "newUser":
-                        CreateContacts create = new CreateContacts();
-                        create.NewUser();
+                    case 6:
+                        AddressBookMain.CreateDictionaryContacts();
+                        Console.Clear();
                         break;
+                    case 7:
+                        AddressBookMain.DisplayDictionaryList();
+                        Console.Clear();
+                        break;
+                    case 8:
+                        AddressBookMain.CheckDuplicateEntryOfSamePersonByName();
+                        Console.Clear();
+                        break;
+                 
                     default:
-                        if (command != "exit")
-                        {
-                            CreateContacts.DisplayHelp();
-                        }
+
+                        flag = false;
+                        Console.ReadLine();
                         break;
                 }
             }

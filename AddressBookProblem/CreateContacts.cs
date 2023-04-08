@@ -5,71 +5,79 @@ using System.Text;
 
 namespace AddressBookProblems
 {
-    public class CreateContacts
+    public class AddressBookMain
     {
-        public static List<PersonalDetails> Person = new List<PersonalDetails>();
-        Dictionary<string, List<PersonalDetails>> book = new Dictionary<string, List<PersonalDetails>>();
-        public static void PersonInformations()
+        public static List<Contacts> Person = new List<Contacts>();
+        public static Dictionary<string, List<Contacts>> dictionarybook = new Dictionary<string, List<Contacts>>();
+        /// <summary>
+        /// UC2- Add Contact to Address Book
+        /// </summary>
+        public static void AddContacts()
         {
-            PersonalDetails contacts = new PersonalDetails();
-            Console.Write("Enter First Name:   ");
-            contacts.firstName = Console.ReadLine();
-            Console.Write("Enter Last Name:   ");
-            contacts.lastName = Console.ReadLine();
-            Console.Write("Enter Address:   ");
-            contacts.address = Console.ReadLine();
-            Console.Write("Enter City Name:   ");
-            contacts.city = Console.ReadLine();
-            Console.Write("Enter State Name:   ");
-            contacts.state = Console.ReadLine();
-            Console.Write("Enter ZipCode:   ");
-            contacts.zipcode = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Enter Phone Number:   ");
-            contacts.phonenumber = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Enter Email Id:   ");
-            contacts.email = Console.ReadLine();
-            Person.Add(contacts);
+            Console.Clear();
+            Contacts contact = new Contacts();
+            Console.Write("Please enter first name:   ");
+            contact.firstName = Console.ReadLine();
+            Console.Write("Please enter last name:   ");
+            contact.lastName = Console.ReadLine();
+            Console.Write("Please enter address:   ");
+            contact.address = Console.ReadLine();
+            Console.Write("Please enter city name:   ");
+            contact.city = Console.ReadLine();
+            Console.Write("Please enter state name:   ");
+            contact.state = Console.ReadLine();
+            Console.Write("Please enter zip code:   ");
+            contact.zipcode = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Please enter phone number: ");
+            contact.phoneNumber = Convert.ToInt64(Console.ReadLine());
+            Console.Write("Please enter email id:  ");
+            contact.email = Console.ReadLine();
+            Person.Add(contact);
+            Console.WriteLine("\nPress any key to continue.");
+            Console.ReadLine();
         }
-        public static void PrintPerson(PersonalDetails contact)
-        {
-            Console.WriteLine("First Name: " + contact.firstName);
-            Console.WriteLine("Last Name: " + contact.lastName);
-            Console.WriteLine("City Name: " + contact.city);
-            Console.WriteLine("Address : " + contact.address);
-            Console.WriteLine("State : " + contact.state);
-            Console.WriteLine("Zip Code : " + contact.zipcode);
-            Console.WriteLine("Phone Number: " + contact.phonenumber);
-            Console.WriteLine("Email Id : " + contact.email);
-            Console.WriteLine("-------------------------------------------");
-        }
-        public static void ListPeople()
+        public static void DisplayDetails()
         {
             Console.Clear();
             if (Person.Count == 0)
             {
-                Console.WriteLine("Your address book is empty.\n Press any key to continue.");
+                Console.WriteLine("**********----Your address book is empty----*********.\n Press any key to continue.");
                 Console.ReadKey();
                 return;
             }
-            Console.WriteLine("Here are the current people in your address book:\n");
-            foreach (var contact in Person)
+            Console.WriteLine("Here are the current people in your address book:\n----------------------------------------------");
+            foreach (var item in Person)
             {
-                PrintPerson(contact);
+                Console.WriteLine("First Name: " + item.firstName);
+                Console.WriteLine("Last Name: " + item.lastName);
+                Console.WriteLine("City Name: " + item.city);
+                Console.WriteLine("Address : " + item.address);
+                Console.WriteLine("State : " + item.state);
+                Console.WriteLine("Zip Code : " + item.zipcode);
+                Console.WriteLine("Phone Number: " + item.phoneNumber);
+                Console.WriteLine("Email Id : " + item.email);
+                Console.WriteLine("-------------------------------------------");
             }
-            Console.WriteLine("\nPress any key to continue.");
+            Console.WriteLine("Press any key to continue.");
             Console.ReadKey();
         }
-        public static void EditOfDetails()
+        /// <summary>
+        /// UC3-Edit existing contact person using their name.
+        /// </summary>
+        public static void EditPersonDetails()
         {
-            Console.WriteLine("Enter First Name: ");
-            string name = Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("Enter First Name of the person you want to edit: ");
+            string fName = Console.ReadLine();
+            Console.WriteLine("Enter Last Name of the person you want to edit: ");
+            string lName = Console.ReadLine();
             foreach (var data in Person)
             {
                 if (Person.Contains(data))
                 {
-                    if (data.firstName == name)
+                    if (data.firstName.ToLower().Equals(fName.ToLower()) || data.lastName.ToLower().Equals(lName.ToLower()))
                     {
-                        Console.WriteLine("To edit contacts enter \n1.FirstName\n 2.LastName\n 3.Address\n 4.City\n 5.State\n 6.Zipcode\n 7.PhoneNumber\n");
+                        Console.WriteLine("Please select option whivh you want to edit :-- \n 1.FirstName and LastName\n 2.Address\n 3.City\n 4.State\n 5.Zipcode\n 6.PhoneNumber\n");
                         int option = Convert.ToInt32(Console.ReadLine());
                         switch (option)
                         {
@@ -77,36 +85,34 @@ namespace AddressBookProblems
                                 Console.WriteLine("Enter New First Name : ");
                                 string firstName = Console.ReadLine();
                                 data.firstName = firstName;
-                                break;
-                            case 2:
                                 Console.WriteLine("Enter New Last Name : ");
                                 string lastName = Console.ReadLine();
                                 data.lastName = lastName;
                                 break;
-                            case 3:
+                            case 2:
                                 Console.WriteLine("Enter New Address : ");
                                 string address = Console.ReadLine();
                                 data.address = address;
                                 break;
-                            case 4:
+                            case 3:
                                 Console.WriteLine("Enter City : ");
                                 string city = Console.ReadLine();
                                 data.city = city;
                                 break;
-                            case 5:
+                            case 4:
                                 Console.WriteLine("Enter New State : ");
                                 string state = Console.ReadLine();
                                 data.state = state;
                                 break;
-                            case 6:
+                            case 5:
                                 Console.WriteLine("Enter New Zip Code : ");
                                 int zipCode = Convert.ToInt32(Console.ReadLine());
                                 data.zipcode = zipCode;
                                 break;
-                            case 7:
+                            case 6:
                                 Console.WriteLine("Enter New Phone Number : ");
                                 int phonenumber = Convert.ToInt32(Console.ReadLine());
-                                data.phonenumber = phonenumber;
+                                data.phoneNumber = phonenumber;
                                 break;
                             default:
                                 Console.WriteLine("Select Valid option ");
@@ -116,117 +122,111 @@ namespace AddressBookProblems
                     else
                     {
                         Console.WriteLine("Name does not match");
+                        Console.ReadLine();
                     }
                 }
             }
         }
-        public static void DeletePerson()
-        {
-            List<PersonalDetails> Person = FindPeopleByFirstName();
-
-            Console.Clear();
-
-            if (Person.Count == 0)
-            {
-                Console.WriteLine("That person could not be found. Press any key to continue");
-                Console.ReadKey();
-                return;
-            }
-
-            if (Person.Count == 1)
-            {
-                DeletePersonFromList(Person.Single());
-                Person.Single();
-                return;
-            }
-
-            Console.WriteLine("Enter the number of the person you want to remove");
-            for (int i = 0; i < Person.Count; i++)
-            {
-                Console.WriteLine(i);
-                PrintPerson(Person.ElementAt(i));
-            }
-            int removePersonNumber = Convert.ToInt32(Console.ReadLine());
-            if (removePersonNumber > Person.Count - 1 || removePersonNumber < 0)
-            {
-                Console.WriteLine("That number is invalid. Press any key to continue.");
-                Console.ReadKey();
-                return;
-            }
-            DeletePersonFromList(Person.ElementAt(removePersonNumber));
-        }
-        public static void DeletePersonFromList(PersonalDetails contact)
+        /// <summary>
+        /// UC4-Delete a person using person's name
+        /// </summary>
+        public static void DeletePersonByUsingPersonName()
         {
             Console.Clear();
-            Console.WriteLine("Are you sure you want to remove this person from your address book? (Y/N)");
-            PrintPerson(contact);
-
-            if (Console.ReadKey().Key == ConsoleKey.Y)
+            Console.WriteLine("Enter the first name of that person you want to remove: ");
+            string fName = Console.ReadLine();
+            foreach (var data in Person)
             {
-                Person.Remove(contact);
-                Console.Clear();
-                Console.WriteLine("Person removed. Press any key to continue.");
-                Console.ReadKey();
-            }
-        }
-        public static List<PersonalDetails> FindPeopleByFirstName()
-        {
-            Console.Clear();
-            Console.WriteLine("Enter the first name of the person ");
-            string firstName = Console.ReadLine();
-            return Person.Where(x => x.firstName.ToLower() == firstName.ToLower()).ToList();
-        }
-        public static void AddMultipleContacts()
-        {
-            Console.WriteLine("Enter the Number of Records you want to Insert");
-            int number = (int)Convert.ToInt64(Console.ReadLine());
-            while (number > 0)
-            {
-                PersonInformations();
-                number--;
-            }
-        }
-        public void NewUser()
-        {
-            Console.WriteLine("Enter the Bookname: ");
-            string Bookname = Console.ReadLine();
-            Console.WriteLine("Enter The Number of Contacts To Add");
-            int number = int.Parse(Console.ReadLine());
-            while (number > 0)
-            {
-                number--;
-                PersonInformations();
-            }
-            book.Add(Bookname, Person.ToList());
-        }
-        public void DisplayList()
-        {
-            foreach (var pair in book.Keys)
-            {
-                Console.WriteLine("Address Book Name " + pair);
-                foreach (PersonalDetails data in book[pair])
+                if (data.firstName.ToLower() == fName.ToLower())
                 {
-                    Console.WriteLine("First Name: " + data.firstName);
-                    Console.WriteLine("Last Name: " + data.lastName);
-                    Console.WriteLine("Address: " + data.address);
-                    Console.WriteLine("City : " + data.city);
-                    Console.WriteLine("State: " + data.state);
-                    Console.WriteLine("Zip : " + data.zipcode);
-                    Console.WriteLine("Phone Number: " + data.phonenumber);
-                    Console.WriteLine("EmailID: " + data.email);
+                    Person.Remove(data);
+                    Console.WriteLine("{0} is deleted sucessfully from the AddressBook\nPress any key to continue", data.firstName);
+                    Console.ReadLine();
+                    return;
                 }
             }
         }
-        public static void DisplayHelp()
+        /// <summary>
+        /// UC5- Ability to add multiple person to Address Book.
+        /// </summary>
+        public static void AddMultiplePerson()
         {
             Console.Clear();
-            Console.WriteLine("Enter only Available Commands are :");
-            Console.WriteLine("add => \tAdds a person to address book");
-            Console.WriteLine("edit => \tEdit a person to address book by first name");
-            Console.WriteLine("remove => \tRemoves a person from address book");
-            Console.WriteLine("list => \tLists out all people in the address book");
-            Console.WriteLine("Press \tAny key to continue");
-            Console.WriteLine("\n");
+            Console.WriteLine("Please enter number of person add in Contact");
+            int numberPerson = Convert.ToInt32(Console.ReadLine());
+            while (numberPerson > 0)
+            {
+                AddContacts();
+                numberPerson--;
+            }
+        }
+        /// <summary>
+        /// UC6- Refactor to add multiple Address Book to the System.Each Address Book has a unique Name
+        /// </summary>
+        public static void CreateDictionaryContacts()
+        {
+            Console.Clear();
+            Console.WriteLine("Enter name which you want to give their new address book");
+            string name = Console.ReadLine();//key 
+            Console.WriteLine("Please enter number of person add in Contact");
+            int numberPerson = Convert.ToInt32(Console.ReadLine());
+            while (numberPerson > 0)
+            {
+                AddContacts();
+                numberPerson--;
+            }
+            dictionarybook.Add(name, Person.ToList());
+        }
+        public static void DisplayDictionaryList()
+        {
+            Console.Clear();
+            if (Person.Count == 0)
+            {
+                Console.WriteLine("**********----Your address book is empty----*********.\n Press any key to continue.");
+                Console.ReadLine();
+                return;
+            }
+            Console.WriteLine("Here are the current people in your address book:\n----------------------------------------------");
+            foreach (var data in dictionarybook)
+            {
+                Console.WriteLine(data.Key);//printing dictionary keys
+                Console.WriteLine("-------------------------------------------");
+                foreach (var item in data.Value)//printing dictionary values
+                {
+                    Console.WriteLine("First Name: " + item.firstName);
+                    Console.WriteLine("Last Name: " + item.lastName);
+                    Console.WriteLine("City Name: " + item.city);
+                    Console.WriteLine("Address : " + item.address);
+                    Console.WriteLine("State : " + item.state);
+                    Console.WriteLine("Zip Code : " + item.zipcode);
+                    Console.WriteLine("Phone Number: " + item.phoneNumber);
+                    Console.WriteLine("Email Id : " + item.email);
+                    Console.WriteLine("-------------------------------------------");
+                }
+            }
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadLine();
+        }
+        /// <summary>
+        /// UC7- Ability to ensure there is no duplicate Entry of the same Person in Address Book.
+        /// </summary>
+        public static void CheckDuplicateEntryOfSamePersonByName()
+        {
+            Console.Clear();
+            Console.WriteLine("Enter first name to which you want to  check duplicate entry ");
+            string name = Console.ReadLine();
+            bool check = Person.Any(s => s.firstName.ToLower() == name.ToLower());
+            if (check)
+            {
+                Console.WriteLine("contact Exists");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("In address book ==> {0} is not present \n So we add this person in contact\n just press enter and fill all details..");
+                Console.ReadLine();
+                AddContacts();
+            }
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AddressBookProblems
 {
-    public class PersonalDetails
+    public class Contacts
     {
         public string firstName { get; set; }
         public string lastName { get; set; }
@@ -12,7 +12,7 @@ namespace AddressBookProblems
         public string city { get; set; }
         public string state { get; set; }
         public int zipcode { get; set; }
-        public double phonenumber { get; set; }
+        public long phoneNumber { get; set; }
         public string email { get; set; }
     }
 }
