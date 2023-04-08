@@ -1,5 +1,8 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
+using System.Formats.Asn1;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -251,6 +254,7 @@ namespace AddressBookProblems
                         {
                             Console.WriteLine("The Contact Details of " + data.city + " are:\n--------------------------" + "\nFirstName: " + data.firstName + " " + "\nLastName: " + data.lastName + " " + "\nZipcode: " + data.zipcode + " " + "\nPhoneNumber: " + data.phoneNumber);
                             Console.WriteLine("\nPress any key to continue....");
+                            Console.ReadLine();//
                             return;
                         }
                     }
@@ -270,6 +274,7 @@ namespace AddressBookProblems
                         {
                             Console.WriteLine("The Contact Details of " + data.state + " are:\n-------------------------" + "\nFirstName: " + data.firstName + " " + "\nLastName: " + data.lastName + " " + "\nZipcode: " + data.zipcode + " " + "\nPhoneNumber: " + data.phoneNumber);
                             Console.WriteLine("\nPress any key to continue....");
+                            Console.ReadLine();//
                             return;
                         }
                     }
@@ -427,8 +432,7 @@ namespace AddressBookProblems
         /// </summary>
         public static void ReadWritePersonContactsByUsingFileIO()
         {
-            //Write in  file
-            Console.Clear();
+            //Write into file
             string filePath = @"C:\Users\Basha\Documents\BridgeLabz\AddressBookProblem\AddressBookProblem\PersonDetails.txt";
             StreamWriter writer = new StreamWriter(filePath);
             foreach (var data in Person)
@@ -439,9 +443,28 @@ namespace AddressBookProblems
             //Read from file
             StreamReader reader = new StreamReader(filePath);
             Console.WriteLine(reader.ReadToEnd());
-            Console.ReadLine();
-            Console.WriteLine("Press any key to continue.");
             reader.Close();
+        }
+        /// <summary>
+        /// UC14- Read or Write the Address Book with Persons Contact as CSV File.
+        /// </summary>
+        public static void ReadWritePersonContactsAsCSVFile()
+        {
+            //Write into file
+            string csvFilePath = @"C:\Users\Basha\Documents\BridgeLabz\AddressBookProblem\AddressBookProblem\PersonDetailsInCSVFile.csv";
+            StreamWriter writer = new StreamWriter(csvFilePath);
+            CsvWriter csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture);
+            csvWriter.WriteRecords(Person);
+            writer.Close();
+            //Read from file
+            StreamReader streamReader = new StreamReader(csvFilePath);
+            CultureInfo culture = CultureInfo.InvariantCulture;
+            CsvReader reader = new CsvReader(streamReader, culture);
+            var record = reader.GetRecords<Contacts>().ToList();
+            foreach (Contacts data in record)
+            {
+                Console.WriteLine("FirstName: " + data.firstName + "    " + "\nLastName: " + data.lastName + "    " + "\nAddress: " + data.address + "    " + "\nCityName: " + data.city + "    " + "\nStateName: " + data.state + "    " + "\nZipCode: " + data.zipcode + "    " + "\nPhoneNumber: " + data.phoneNumber + "    " + "\nEmailId: " + data.email + "\n------------------------------------");
+            }
         }
     }
 }
