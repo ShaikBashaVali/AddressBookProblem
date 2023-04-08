@@ -22,9 +22,11 @@ namespace AddressBookProblems
                     "6.CreateDictionaryContacts\n" +
                     "7.DisplayDictionaryList\n" +
                     "8.CheckDuplicateEntryOfSamePersonByPersonNameInList\n" +
-                    "9.ViewPersonByCityOrStateInDictionaryAB\n" +
-                    "10.SearchPersonByCityOrStateInDictionaryAB\n" +
-                    "11.Exit\n");
+                    "9.SearchPersonByCityOrStateInDictionaryAB\n" +
+                    "10.ViewPersonByCityOrStateInDictionaryAB\n" +
+                    "11.GetNumberOfContactPersonsThatIsCounrByCityOrStateInList\n" +
+                    "12.SortEntriesInAddressBookByPersonsNameInList\n" +
+                    "13.Exit\n");
                 int option = Convert.ToInt32(Console.ReadLine());
                 switch (option)
                 {
@@ -66,6 +68,14 @@ namespace AddressBookProblems
                         break;
                     case 10:
                         AddressBookMain.ViewPersonByCityOrState();
+                        Console.Clear();
+                        break;
+                    case 11:
+                        AddressBookMain.CountCityOrState();
+                        Console.Clear();
+                        break;
+                    case 12:
+                        AddressBookMain.SortPersonsName();
                         Console.Clear();
                         break;
                     default:
